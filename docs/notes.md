@@ -43,4 +43,12 @@ Quick reference of commands I encountered while going through the book:
 
 `python manage.py startapp [APP_NAME]`
 
+### Database + Migrations
+
 `python manage.py migrate`
+
+`python manage.py makemigrations [optional:APP_NAME]` | Without the `APP_NAME`, Django will create migration scripts for all apps.
+
+`python manage.py showmigrations` | Show migration status (whether a script has been run or not).
+
+`python manage.py sqlmigrate [APP_NAME] [MIGRATION_SCRIPT]` |  Shows the SQL command equivalent used when Django runs the migration script.
