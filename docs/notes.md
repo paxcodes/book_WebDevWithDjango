@@ -43,4 +43,4 @@ Quick reference of commands I encountered while going through the book:
 
 `python manage.py startapp [APP_NAME]`
 
-
+`python manage.py migrate`
