@@ -34,6 +34,16 @@ class Book(models.Model):
     title = models.CharField(max_length=70, help_text="The title of the book.")
     publication_date = models.DateField(verbose_name="Date the book was published.")
     isbn = models.CharField(max_length=20, verbose_name="ISBN number of the book.")
+
+    ### RELATIONSHIPS
+    # Since `publisher` is a non-nullable ForeignKey, it is mandatory to pass.
+    # `contributors`, on the other hand, are not mandatory.
+    # Book.objects.create(
+    #   title="Cracking the Code",
+    #   publication_date=date(2012, 11, 21),
+    #   isbn="7537334534243",
+    #   publisher=some_publisher_object
+    # )
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     contributors = models.ManyToManyField(Contributor, through='BookContributor')
 
