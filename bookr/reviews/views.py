@@ -1,11 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
+from .models import Book
 
-def index(request):
-    return render(request, "base.html")
-
-
-def book_search_results(request):
-    search = request.GET.get("search", "")
-    # TODO handle if search is an empty string
-    return render(request, "search-results.html", {"search_keywords": search})
+def welcome_view(request):
+    message = f"<html><h1>Welcome to Bookr!</h1> Something more her {Book.objects.count()}</html>"
+    return HttpResponse(message)

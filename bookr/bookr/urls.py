@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-import reviews.views
+from django.urls import include, path
 
 urlpatterns = [
-    path("", reviews.views.index),
-    path("book-search", reviews.views.book_search_results),
+    # `include()` is a shortcut that allows you to combine URL configurations.
+    # It is common to keep one URL configuration per application in your Django project.
+    # Here, we've created a separate URL configuration for the `reviews` app and have
+    # added it to our project-level URL configuration.
+    # TODO Why does the `admin/` path not use `include()`? It doesn't follow any of the
+    # pattern found in the examples (see docstring on top of this file).
+    path("", include('reviews.urls')),
     path("admin/", admin.site.urls),
 ]
