@@ -22,7 +22,7 @@ class Task(models.Model):
         HIGH = "!!!", "HIGH"
 
     title = models.CharField(max_length=200)
-    details = models.CharField(max_length=1000)
+    details = models.CharField(null=True, max_length=1000)
     due_date = models.DateField(null=True)
     completed = models.BooleanField(default=False, help_text="Task completion status")
     priority = models.CharField(
