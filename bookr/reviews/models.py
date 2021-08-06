@@ -25,7 +25,7 @@ class Contributor(models.Model):
     email = models.EmailField(help_text="The contact email for the contributor.")
 
     def __str__(self):
-        return self.first_names
+        return f"{self.last_names}, {self.first_names}"
 
 
 class Book(models.Model):
