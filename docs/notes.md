@@ -45,7 +45,7 @@ Quick reference of commands I encountered while going through the book:
 
 ### Database + Migrations
 
-`python manage.py migrate`
+`python manage.py migrate [optional:APP_NAME]`
 
 `python manage.py makemigrations [optional:APP_NAME]` | Without the `APP_NAME`, Django will create migration scripts for all apps.
 
