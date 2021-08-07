@@ -1,6 +1,20 @@
 # Notes
 
-Things I learned and caught me by surprise.
+Things I learned; Things that caught me by surprise; Quick reference to commands, syntax, and common operations.
+
+- [Chapter 1: Introduction to Django](#chapter-1-introduction-to-django)
+  - [Scaffolding a Django Project and App: Repetitive Folder Names](#scaffolding-a-django-project-and-app-repetitive-folder-names)
+  - [❓ Apps can have their own apps?](#-apps-can-have-their-own-apps)
+  - [Registering Templates](#registering-templates)
+- [Cheatsheet](#cheatsheet)
+  - [Database + Migrations](#database--migrations)
+  - [CRUD Operations](#crud-operations)
+    - [`Create` Operations](#create-operations)
+    - [`Read` Operations](#read-operations)
+    - [`Update` Operations](#update-operations)
+    - [`Delete` Operation](#delete-operation)
+  - [Django Template Language](#django-template-language)
+
 
 ## Chapter 1: Introduction to Django
 
