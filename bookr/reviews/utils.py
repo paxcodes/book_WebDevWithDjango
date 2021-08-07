@@ -1,3 +1,4 @@
+# TODO we should make this a property under Book model
 def average_rating(rating_list):
     """Helper method that calculates the average rating of a book."""
     if not rating_list:

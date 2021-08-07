@@ -6,7 +6,8 @@ Things I learned; Things that caught me by surprise; Quick reference to commands
   - [Scaffolding a Django Project and App: Repetitive Folder Names](#scaffolding-a-django-project-and-app-repetitive-folder-names)
   - [❓ Apps can have their own apps?](#-apps-can-have-their-own-apps)
   - [Registering Templates](#registering-templates)
-- [Cheatsheet](#cheatsheet)
+- [❓ Type-checking](#-type-checking)
+- [Cheat sheet](#cheat-sheet)
   - [Database + Migrations](#database--migrations)
   - [CRUD Operations](#crud-operations)
     - [`Create` Operations](#create-operations)
@@ -47,7 +48,35 @@ When I created an app `reviews` under the `bookr` project, under `reviews` folde
 
 \* That is, it will look in *registered* apps' templates directories. You _register_ an app by adding it in the `INSTALLED_APPS` list.
 
-## Cheatsheet
+## ❓ Type-checking
+
+When using `get_object_or_404`, 
+
+```py
+book = get_object_or_404(Book, pk=pk)
+book_rating = reviews = None
+if reviews := book.review_set.all():
+```
+
+Pylance is complaining,
+
+```
+Cannot access member "review_set" for type "Book"
+  Member "review_set" is unknown
+```
+
+But Pylance doesn't complain with this,
+
+```py
+books = Book.objects.all()
+for book in books:
+    if reviews := book.review_set.all():
+```
+
+I had to disable type-checking. Perhaps relevant [issue](https://github.com/microsoft/pylance-release/issues/532)? 
+
+
+## Cheat sheet
 
 Quick reference of commands I encountered while going through the book:
 

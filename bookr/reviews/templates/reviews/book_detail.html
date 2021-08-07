@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+<hr />
+<div>
+    <span>Publisher:</span><span>{{ book.publisher }}</span><br />
+    <span>Publication Date:</span><span>{{ book.publication_date }}</span><br />
+    <span>Rating:</span><span>{{ book_rating }}</span><br />
+</div>
+
+<h2>Reviews</h2>
+{% if reviews %}
+    {% for review in reviews %}
+    <ul>
+        <li>
+            {{ review.date_created }} &middot; <span>{{ review.pretty_rating }}</span>
+            <p>{{review.content }}</p>
+            &mdash; <span>{{ review.creator.email }}</span>
+        </li>
+    </ul>
+    {% endfor %}
+{% else %}
+    <span>Provide a rating and write the first review for this book.</span><br />
+{% endif %}
+
+{% endblock %}

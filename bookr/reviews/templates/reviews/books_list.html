@@ -14,7 +14,7 @@
         {% if item.book_rating is null %}
         <span>Provide a rating and write the first review for this book.</span><br />
         {% endif %}
-        <br />
+        <a href="/books/{{ item.book.id }}">Reviews</a>
     </li>
     {% endfor %}
 </ul>
