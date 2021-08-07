@@ -86,6 +86,8 @@ Quick reference of commands I encountered while going through the book:
 
 `python manage.py startapp [APP_NAME]`
 
+`python manage.py createsuperuser`
+
 ### Database + Migrations
 
 `python manage.py migrate [optional:APP_NAME]`
