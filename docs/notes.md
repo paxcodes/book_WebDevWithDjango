@@ -239,3 +239,34 @@ Book.objects.filter(pk=1).update(title="Cracking the Coding Interview")
 ```py
 Contributor.objects.get(pk=1).delete()
 ```
+
+### Django Template Language
+
+```
+{{ variable }}
+
+##################
+# FILTERS
+# `{{ variable|<filter_name> }}`
+# https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#built-in-filter-reference
+##################
+
+# Convert the variable to lowercase
+{{ variable|lower }}
+
+#  Convert the first letter of every word into uppercase
+{{ variable|title }}
+```
+
+```
+{% for element in element_list %}
+
+{% endfor %}
+```
+
+```
+{% comment %}
+
+{% endcomment %}
+```
+
