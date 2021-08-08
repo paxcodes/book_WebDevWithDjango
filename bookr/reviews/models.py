@@ -47,6 +47,10 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     contributors = models.ManyToManyField(Contributor, through='BookContributor')
 
+    def isbn13(self):
+        """Format isbn with hyphens."""
+        return f"{self.isbn[0:3]}-{self.isbn[3:4]}-{self.isbn[4:6]}-{self.isbn[6:12]}-{self.isbn[12:13]}"
+
     def __str__(self) -> str:
         return self.title
 

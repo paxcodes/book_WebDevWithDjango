@@ -16,11 +16,6 @@ class ContributorAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'isbn13')
 
-    def isbn13(self, obj):
-        """Format isbn with hyphens."""
-        return f"{obj.isbn[0:3]}-{obj.isbn[3:4]}-{obj.isbn[4:6]}-{obj.isbn[6:12]}-{obj.isbn[12:13]}"
-
-
 
 admin.site.register(Publisher)
 admin.site.register(Contributor, ContributorAdmin)
