@@ -23,6 +23,7 @@ urlpatterns = [
     # added it to our project-level URL configuration.
     # TODO Why does the `admin/` path not use `include()`? It doesn't follow any of the
     # pattern found in the examples (see docstring on top of this file).
+    # TODO POSSIBLE ANSWER: admin.site.urls is already a tuple
     path("", include('reviews.urls')),
     path("admin/", admin.site.urls),
 ]
