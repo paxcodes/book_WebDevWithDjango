@@ -14,7 +14,9 @@ class ContributorAdmin(admin.ModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'isbn13')
+    date_hierarchy = 'publication_date'
+    list_display = ('title', 'isbn13', 'publication_date', 'publisher')
+    list_filter = ['publisher', 'publication_date']
 
 
 admin.site.register(Publisher)
