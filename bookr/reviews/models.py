@@ -25,7 +25,13 @@ class Contributor(models.Model):
     email = models.EmailField(help_text="The contact email for the contributor.")
 
     def __str__(self):
-        return f"{self.last_names}, {self.first_names}"
+        return self.initialed_name
+
+    @property
+    def initialed_name(self):
+        """Name of contributor with only first names' initials. E.g. Pax, RW"""
+        fn_initials = ''.join(name[0] for name in self.first_names.split(' '))
+        return f"{self.last_names}, {fn_initials}"
 
 
 class Book(models.Model):
