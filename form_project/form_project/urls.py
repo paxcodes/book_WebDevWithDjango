@@ -20,5 +20,6 @@ import form_example.views
 
 urlpatterns = [
     path('form-example/', form_example.views.form_example),
+    path('success-page/', form_example.views.form_success),
     path('admin/', admin.site.urls),
 ]
