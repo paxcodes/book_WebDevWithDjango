@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import Book
 from .utils import average_rating
 from .forms import SearchForm
+from .crud import books
 
 
 def index(request):
@@ -11,17 +12,22 @@ def index(request):
 
 def book_search(request):
     form = SearchForm(request.GET)
+    if form.is_valid():
+        results = books.search(
+            attr=request.GET["search_in"], search_text=request.GET["search"]
+        )
     # TODO do we still need the code below?
     search_text = request.GET.get("search", "")
     return render(
         request,
         "reviews/search-results.html",
-        {"search_text": search_text, "form": form},
+        {"search_text": search_text, "form": form, "results": results},
     )
 
 
 def index(request):
     return render(request, 'base.html')
+
 
 def book_list(request):
     books = Book.objects.all()

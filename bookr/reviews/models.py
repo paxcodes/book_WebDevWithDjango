@@ -33,6 +33,11 @@ class Contributor(models.Model):
         fn_initials = ''.join(name[0] for name in self.first_names.split(' '))
         return f"{self.last_names}, {fn_initials}"
 
+    @property
+    def full_name(self):
+        """Full name of contributor. E.g. Williams, Pax"""
+        return f"{self.last_names}, {self.first_names}"
+
 
 class Book(models.Model):
     """A published book."""
