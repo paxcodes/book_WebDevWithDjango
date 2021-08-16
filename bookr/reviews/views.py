@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Book, Review
+from .models import Book
 from .utils import average_rating
 
 
