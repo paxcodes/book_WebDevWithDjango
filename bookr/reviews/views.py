@@ -1,7 +1,23 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Book, Review
+from .models import Book
 from .utils import average_rating
+from .forms import SearchForm
+
+
+def index(request):
+    return render(request, "base.html")
+
+
+def book_search(request):
+    form = SearchForm(request.GET)
+    # TODO do we still need the code below?
+    search_text = request.GET.get("search", "")
+    return render(
+        request,
+        "reviews/search-results.html",
+        {"search_text": search_text, "form": form},
+    )
 
 
 def index(request):

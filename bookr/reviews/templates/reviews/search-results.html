@@ -6,11 +6,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results for {{ search }} | Bookr</title>
+    <title>Search Results for {{ search_text }} | Bookr</title>
 </head>
 
 <body>
-    <h1>Search Results for <em>{{ search_keywords }}</em></h1>
+    <form method="get">
+        {{ form.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <h1>Search Results for <em>{{ search_text }}</em></h1>
 </body>
 
 </html>
