@@ -16,7 +16,8 @@ def book_search(request):
     # some search text"
     if form.is_valid() and (search_text := form.cleaned_data.get("search", "")):
         results = books.search(
-            attr=request.GET["search_in"], search_text=request.GET["search"]
+            attr=form.cleaned_data.get("search_in", "title"),
+            search_text=search_text,
         )
     # TODO do we still need the code below?
     search_text = request.GET.get("search", "")
