@@ -9,9 +9,10 @@
 {% endblock title %}
 
 {% block content %}
+    <h2>Search for Books</h2>
     <form method="get">
         {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" class="btn btn-primary" />
     </form>
 
     <h1>Search Results for <em>{{ search_text }}</em></h1>
