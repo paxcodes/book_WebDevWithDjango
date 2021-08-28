@@ -12,7 +12,9 @@ def index(request):
 
 def book_search(request):
     form = SearchForm(request.GET)
-    if form.is_valid():
+    # "The search should only be performed if the form is valid and contains
+    # some search text"
+    if form.is_valid() and (search_text := form.cleaned_data.get("search", "")):
         results = books.search(
             attr=request.GET["search_in"], search_text=request.GET["search"]
         )
