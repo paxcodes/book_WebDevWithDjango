@@ -14,6 +14,7 @@ def book_search(request):
     form = SearchForm(request.GET)
     # "The search should only be performed if the form is valid and contains
     # some search text"
+    results = []
     if form.is_valid() and (search_text := form.cleaned_data.get("search", "")):
         results = books.search(
             attr=form.cleaned_data.get("search_in", "title"),
