@@ -19,8 +19,6 @@ def book_search(request):
             attr=form.cleaned_data.get("search_in", "title"),
             search_text=search_text,
         )
-    # TODO do we still need the code below?
-    search_text = request.GET.get("search", "")
     return render(
         request,
         "reviews/search-results.html",
