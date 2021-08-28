@@ -1,5 +1,13 @@
 {% extends 'reviews/base.html' %}
 
+{% block title %}
+    {% if form.is_valid and search_text %}
+        Search Results for {{ search_text }}
+    {% else %}
+        Book Search
+    {% endif %}
+{% endblock title %}
+
 {% block content %}
     <form method="get">
         {{ form.as_p }}
