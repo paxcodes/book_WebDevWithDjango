@@ -16,24 +16,23 @@
     </form>
 
     {% if form.is_valid and search_text %}
-        <h3>Search Results for <em>{{ search_text }}</em></h3>
-    {% endif %}
-
-    {% if not results %}
-        <p>No results for <em>{{ search_text }}</em></p>
-    {% endif %}
-    {% for book in results %}
-        <div>
-            <span>Title:</span> <span>{{ book.title }}</span><br />
-            <span>Publisher:</span><span>{{ book.publisher }}</span><br />
-            <span>Publication Date:</span><span>{{ book.publication_date }}</span><br />
-            <span>Contributors:</span>
-            <ul>
-            {% for contributor in book.contributors.all %}
-                <li>{{ contributor.full_name }}</li>
+        {% if not results %}
+            <p>No results for <em>{{ search_text }}</em>.</p>
+        {% else %}
+            <h3>Search Results for <em>{{ search_text }}</em></h3>
+            <ul class="list-group">
+            {% for book in results %}
+                <li class="list-group-item">
+                    <span><a href="/books/{{ book.id }}">{{ book.title }}</a></span><br />
+                    <span>Contributors:</span>
+                    <ul>
+                    {% for contributor in book.contributors.all %}
+                        <li>{{ contributor.full_name }}</li>
+                    {% endfor %}
+                    </ul>
+                </li>
             {% endfor %}
             </ul>
-            <a href="/books/{{ book.id }}">Reviews</a>
-        </div>
-    {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endblock content %}
