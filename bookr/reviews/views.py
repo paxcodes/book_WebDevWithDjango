@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, render
 
 from .models import Book
 from .utils import average_rating
+from .forms import SearchForm
+from .crud import books
 
 
 def index(request):
@@ -9,8 +11,24 @@ def index(request):
 
 
 def book_search(request):
-    search_text = request.GET.get("search", "")
-    return render(request, "reviews/search-results.html", {"search_text": search_text})
+    form = SearchForm(request.GET)
+    # "The search should only be performed if the form is valid and contains
+    # some search text"
+    results = []
+    if form.is_valid() and (search_text := form.cleaned_data.get("search", "")):
+        results = books.search(
+            attr=form.cleaned_data.get("search_in", "title"),
+            search_text=search_text,
+        )
+    return render(
+        request,
+        "reviews/search-results.html",
+        {"search_text": search_text, "form": form, "results": results},
+    )
+
+
+def index(request):
+    return render(request, 'base.html')
 
 
 def book_list(request):

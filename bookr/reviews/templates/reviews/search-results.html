@@ -1,16 +1,38 @@
-<!DOCTYPE html>
+{% extends 'reviews/base.html' %}
 
-<html lang="en">
+{% block title %}
+    {% if form.is_valid and search_text %}
+        Search Results for {{ search_text }}
+    {% else %}
+        Book Search
+    {% endif %}
+{% endblock title %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results for {{ search_text }} | Bookr</title>
-</head>
+{% block content %}
+    <h2>Search for Books</h2>
+    <form method="get">
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
 
-<body>
-    <h1>Search Results for <em>{{ search_text }}</em></h1>
-</body>
-
-</html>
+    {% if form.is_valid and search_text %}
+        {% if not results %}
+            <p>No results for <em>{{ search_text }}</em>.</p>
+        {% else %}
+            <h3>Search Results for <em>{{ search_text }}</em></h3>
+            <ul class="list-group">
+            {% for book in results %}
+                <li class="list-group-item">
+                    <span><a href="/books/{{ book.id }}">{{ book.title }}</a></span><br />
+                    <span>Contributors:</span>
+                    <ul>
+                    {% for contributor in book.contributors.all %}
+                        <li>{{ contributor.full_name }}</li>
+                    {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock content %}
