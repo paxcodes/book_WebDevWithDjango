@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 
-from .forms import ExampleForm
+from .forms import OrderForm
 
 
 def form_example(request):
-    form = ExampleForm(request.POST) if request.method == "POST" else ExampleForm()
+    form = OrderForm(request.POST) if request.method == "POST" else OrderForm()
 
     if form.is_valid():
         # cleaned_data is only populated if the form is valid
