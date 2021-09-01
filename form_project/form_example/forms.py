@@ -55,3 +55,7 @@ class OrderForm(forms.Form):
     book_count = forms.IntegerField(min_value=0, max_value=50)
     send_confirmation = forms.BooleanField(required=False)
     email = forms.EmailField(required=False, validators=[validate_email_domain])
+
+    def clean_email(self):
+        return self.cleaned_data['email'].lower()
+
