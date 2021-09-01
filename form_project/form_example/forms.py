@@ -59,3 +59,10 @@ class OrderForm(forms.Form):
     def clean_email(self):
         return self.cleaned_data['email'].lower()
 
+    def clean(self):
+        cleaned_data = super().clean()
+        if cleaned_data["send_confirmation"] and not cleaned_data.get("email"):
+            self.add_error(
+                "email",
+                "Please enter an email address to receive the confirmation message.",
+            )
