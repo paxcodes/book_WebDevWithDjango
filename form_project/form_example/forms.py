@@ -66,3 +66,9 @@ class OrderForm(forms.Form):
                 "email",
                 "Please enter an email address to receive the confirmation message.",
             )
+        elif cleaned_data.get("email") and not cleaned_data["send_confirmation"]:
+            self.add_error(
+                "send_confirmation",
+                "Please check this if you want to receive a confirmation email.",
+            )
+
