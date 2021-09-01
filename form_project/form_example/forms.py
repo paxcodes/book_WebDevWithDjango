@@ -38,3 +38,20 @@ class ExampleForm(forms.Form):
     email_input = forms.EmailField()
     date_input = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
     hidden_input = forms.CharField(widget=forms.HiddenInput, initial="Hidden Value")
+
+
+def validate_email_domain(value):
+    """Validates that email domain is 'example.com'
+
+    This function alone would not invalidate non-email addresses but combined with an
+    EmailField, it is sufficient.
+    """
+    if value.split("@")[-1].lower() != 'example.com':
+        raise ValidationError("The email address must be on the domain example.com.")
+
+
+class OrderForm(forms.Form):
+    magazine_count = forms.IntegerField(min_value=0, max_value=80)
+    book_count = forms.IntegerField(min_value=0, max_value=50)
+    send_confirmation = forms.BooleanField(required=False)
+    email = forms.EmailField(required=False, validators=[validate_email_domain])
