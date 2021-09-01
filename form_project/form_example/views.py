@@ -4,7 +4,12 @@ from .forms import OrderForm
 
 
 def form_example(request):
-    form = OrderForm(request.POST) if request.method == "POST" else OrderForm()
+    initial_data = {"email": "user@example.com"}
+    form = (
+        OrderForm(request.POST, initial=initial_data)
+        if request.method == "POST"
+        else OrderForm(initial=initial_data)
+    )
 
     if form.is_valid():
         # cleaned_data is only populated if the form is valid
