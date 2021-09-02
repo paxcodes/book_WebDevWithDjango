@@ -72,13 +72,19 @@ def publisher_edit(request, pk=None):
         if form.is_valid():
             updated_publisher = form.save()
             if publisher is None:
-                messages.success(request, f"Publisher {updated_publisher} was created.")
+                messages.success(
+                    request, f'Publisher "{updated_publisher}" was created.'
+                )
             else:
-                messages.success(request, f"Publisher {updated_publisher} was updated.")
+                messages.success(
+                    request, f'Publisher "{updated_publisher}" was updated.'
+                )
             return redirect("publisher_edit", updated_publisher.pk)
     else:
         form = PublisherForm(instance=publisher)
 
     return render(
-        request, "publisher-form.html", {"method": request.method, "form": form}
+        request,
+        "reviews/instance-form.html",
+        {"form": form, "model_type": "Publisher", "instance": publisher},
     )
