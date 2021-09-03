@@ -26,6 +26,7 @@ class ReviewForm(forms.ModelForm):
         fields = (
             "content",
             "rating",
+            "creator",
         )
         # I could use the `exclude` property, like this:
         # exclude = ("book", "date_edited")
