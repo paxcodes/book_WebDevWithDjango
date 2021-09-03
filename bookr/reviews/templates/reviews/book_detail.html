@@ -15,6 +15,7 @@
     {% for review in reviews %}
         <li>
             {{ review.date_created }} &middot; <span>{{ review.pretty_rating }}</span>
+            {% if review.date_edited %}<br/> Last modified: {{ review.date_edited }}{% endif %}
             <p>{{review.content }}</p>
             &mdash; <span>{{ review.creator.email }}</span>
         </li>
