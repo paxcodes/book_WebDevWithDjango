@@ -11,15 +11,15 @@
 
 <h2>Reviews</h2>
 {% if reviews %}
-    {% for review in reviews %}
     <ul>
+    {% for review in reviews %}
         <li>
             {{ review.date_created }} &middot; <span>{{ review.pretty_rating }}</span>
             <p>{{review.content }}</p>
             &mdash; <span>{{ review.creator.email }}</span>
         </li>
-    </ul>
     {% endfor %}
+    </ul>
 {% else %}
     <span>Provide a rating and write the first review for this book.</span><br />
 {% endif %}
