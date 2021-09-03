@@ -32,3 +32,4 @@ class ReviewForm(forms.ModelForm):
         # but whitelisting using `fields` property is more secure in case
         # we add a new field that shouldn't be editable and we forgot to exclude it.
 
+    rating = forms.IntegerField(min_value=0, max_value=5)
