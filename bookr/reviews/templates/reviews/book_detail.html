@@ -11,17 +11,20 @@
 
 <h2>Reviews</h2>
 {% if reviews %}
-    {% for review in reviews %}
     <ul>
+    {% for review in reviews %}
         <li>
             {{ review.date_created }} &middot; <span>{{ review.pretty_rating }}</span>
+            {% if review.date_edited %}<br/> Last modified: {{ review.date_edited }}{% endif %}
             <p>{{review.content }}</p>
             &mdash; <span>{{ review.creator.email }}</span>
+            <a href={% url 'review_edit' book.pk review.pk %}>Edit review</a>
         </li>
-    </ul>
     {% endfor %}
+    </ul>
 {% else %}
     <span>Provide a rating and write the first review for this book.</span><br />
 {% endif %}
 
+<a class="btn btn-primary" href="{% url 'review_create' book.pk %}">Add Review</a>
 {% endblock %}
