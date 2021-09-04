@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     # `include()` is a shortcut that allows you to combine URL configurations.
@@ -27,3 +30,8 @@ urlpatterns = [
     path("", include('reviews.urls')),
     path("admin/", admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(
+        static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
