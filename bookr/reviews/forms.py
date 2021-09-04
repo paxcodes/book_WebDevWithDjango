@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Publisher, Review
+from .models import Book, Publisher, Review
 
 
 SEARCH_IN_CHOICES = (
@@ -34,3 +34,12 @@ class ReviewForm(forms.ModelForm):
         # we add a new field that shouldn't be editable and we forgot to exclude it.
 
     rating = forms.IntegerField(min_value=0, max_value=5)
+
+
+class BookMediaForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = (
+            'cover',
+            'sample',
+        )
