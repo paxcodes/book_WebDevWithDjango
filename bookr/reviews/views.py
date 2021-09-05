@@ -154,7 +154,7 @@ def book_media(request, pk):
                 # Save the image to disk?
                 book.cover.save(cover.name, image_file)
             book.save()
-            messages.success(request, f"Book {book} was successfully updated.")
+            messages.success(request, f'Book "{book}" was successfully updated.')
             return redirect("book_details", book.pk)
     else:
         form = BookMediaForm(instance=book)
