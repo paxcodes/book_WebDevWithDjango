@@ -4,9 +4,17 @@
 <h1>{{ book.title }}</h1>
 <hr />
 <div>
+    {% if book.cover %}
+        <img src="{{ book.cover.url }}" alt="Cover of {{ book.title }}"/><br />
+    {% endif %}
+
     <span>Publisher:</span><span>{{ book.publisher }}</span><br />
     <span>Publication Date:</span><span>{{ book.publication_date }}</span><br />
     <span>Rating:</span><span>{{ book_rating }}</span><br />
+
+    {% if book.sample %}
+        <a href="{{ book.sample.url }}" class="btn btn-secondary">View Sample</a>
+    {% endif %}
 </div>
 
 <h2>Reviews</h2>
@@ -26,5 +34,6 @@
     <span>Provide a rating and write the first review for this book.</span><br />
 {% endif %}
 
-<a class="btn btn-primary" href="{% url 'review_create' book.pk %}">Add Review</a>
+<a class="btn btn-primary" href="{% url 'review_create' book.pk %}">Add Review</a> |
+<a class="btn btn-primary" href="{% url 'book_media_edit' book.pk %}">Edit Media</a>
 {% endblock %}
