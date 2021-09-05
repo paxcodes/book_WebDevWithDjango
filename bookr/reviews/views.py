@@ -1,10 +1,14 @@
+from io import BytesIO
+
+from django.core.files.images import ImageFile
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.utils import timezone
+from PIL import Image
 
 from .models import Book, Publisher, Review
 from .utils import average_rating
-from .forms import SearchForm, PublisherForm, ReviewForm
+from .forms import BookMediaForm, SearchForm, PublisherForm, ReviewForm
 from .crud import books
 
 
@@ -122,4 +126,41 @@ def review_edit(request, book_pk, review_pk=None):
             "related_model_type": "Book",
             "related_instance": book,
         },
+    )
+
+
+def book_media(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        form = BookMediaForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            book = form.save(commit=False)
+            if cover := form.cleaned_data['cover']:
+                image = Image.open(cover)
+                image.thumbnail((300, 300))
+                # Use BytesIO for file-like objects that only exist in memory.
+                # See section "Writing PIL images to ImageField" for more info.
+                # Doing it this way will prevent having to write the image into disk
+                # twice, making the process slower. Rather, the image is written in
+                # memory, processed, then written to disk.
+                image_data = BytesIO()
+                # Writes the thumbnail to the image_data (an in-memory object)
+                image.save(fp=image_data, format=cover.image.format)
+                # Wrap the BytesIO containing the image data into an object the Django
+                # API can interact with. ImageFile is from `django.core.files.images`
+                image_file = ImageFile(image_data)
+                # TODO Clarify what this actually does. Posted an issue in GitHub
+                # https://github.com/PacktPublishing/Web-Development-with-Django/issues/10
+                # Save the image to disk?
+                book.cover.save(cover.name, image_file)
+            book.save()
+            messages.success(request, f"Book {book} was successfully updated.")
+            return redirect("book_details", book.pk)
+    else:
+        form = BookMediaForm(instance=book)
+
+    return render(
+        request,
+        "reviews/instance-form.html",
+        {"instance": book, "form": form, "model_type": "Book", "is_file_upload": True},
     )

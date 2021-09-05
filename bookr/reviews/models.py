@@ -45,6 +45,11 @@ class Book(models.Model):
     title = models.CharField(max_length=70, help_text="The title of the book.")
     publication_date = models.DateField(verbose_name="Date the book was published.")
     isbn = models.CharField(max_length=20, verbose_name="ISBN number of the book.")
+    # Book has trailing slash on directories. E.g. 'book_covers/'
+    # TODO We'll add the trailing slash if this doesn't work. Otherwise, remove
+    # TODO and mention that it also works without a trailing slash.
+    cover = models.ImageField(null=True, blank=True, upload_to='book_covers')
+    sample = models.FileField(null=True, blank=True, upload_to='book_samples')
 
     ### RELATIONSHIPS
     # Since `publisher` is a non-nullable ForeignKey, it is mandatory to pass.
