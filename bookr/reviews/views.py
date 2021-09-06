@@ -20,14 +20,30 @@ def index(request):
 
 def book_search(request):
     form = SearchForm(request.GET)
+    search_history = request.session.get('search_history', [])
+
     # "The search should only be performed if the form is valid and contains
     # some search text"
     results = []
+
     if form.is_valid() and (search_text := form.cleaned_data.get("search", "")):
+        search_option = form.cleaned_data.get("search_in", "title")
+        if request.user.is_authenticated:
+            search_history.append((search_option, search_text))
+            request.session['search_history'] = search_history
+
         results = books.search(
-            attr=form.cleaned_data.get("search_in", "title"),
+            attr=search_option,
             search_text=search_text,
         )
+
+    # "If the form hasn't been filled, render the form with the previously used
+    # `Search in` option selected."
+    if request.GET.get("search") is None and search_history:
+        last_search_in_used = search_history[-1][0]
+        initial = {'search': '', 'search_in': last_search_in_used}
+        form = SearchForm(initial=initial)
+
     return render(
         request,
         "reviews/search-results.html",

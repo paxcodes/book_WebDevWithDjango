@@ -45,5 +45,14 @@
             No recently viewed books found.
         {% endfor %}
     </div>
+
+    <div class="infocell">
+        <h2>Search History</h2>
+        {% for search_in, search_text in request.session.search_history %}
+            {{ search_in }}: {{ search_text }}<br />
+        {% empty %}
+            No recent searches.
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
