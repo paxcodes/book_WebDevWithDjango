@@ -49,7 +49,7 @@
     <div class="infocell">
         <h2>Search History</h2>
         {% for search_in, search_text in request.session.search_history %}
-            {{ search_in }}: {{ search_text }}<br />
+        {{ search_in }}: {{ search_text }} [<a href="{% url 'book_search' %}?search={{search_text|urlencode}}&search_in={{search_in|urlencode}}">results</a>]<br />
         {% empty %}
             No recent searches.
         {% endfor %}
