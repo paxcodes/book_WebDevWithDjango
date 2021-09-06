@@ -20,6 +20,8 @@ def index(request):
 
 def book_search(request):
     form = SearchForm(request.GET)
+    search_history = request.session.get('search_history', [])
+
     # "The search should only be performed if the form is valid and contains
     # some search text"
     results = []
