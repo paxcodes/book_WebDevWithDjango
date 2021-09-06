@@ -69,6 +69,19 @@ def book_details(request, pk):
             # Using a filter? Can't seem to find any in built-in filters
             review.pretty_rating = '⭐️ ' * review.rating
     context = {'book': book, 'book_rating': book_rating, 'reviews': reviews}
+
+    # Start: Exercise 9.06 Storing recently viewed books in sessions
+    if request.user.is_authenticated:
+        max_viewed_books_length = 10
+        viewed_books = request.session.get('viewed_books', [])
+        viewed_book = [book.id, book.title]
+        if viewed_book in viewed_books:
+            viewed_books.pop(viewed_books.index(viewed_book))
+        viewed_books.insert(0, viewed_book)
+        viewed_books = viewed_books[:max_viewed_books_length]
+        request.session['viewed_books'] = viewed_books
+    # End: Exercise 9.06
+
     return render(request, 'reviews/book_detail.html', context)
 
 
