@@ -29,6 +29,9 @@ urlpatterns = [
     # TODO POSSIBLE ANSWER: admin.site.urls is already a tuple
     path("", include('reviews.urls')),
     path("admin/", admin.site.urls),
+    path(
+        "accounts/", include(('django.contrib.auth.urls', 'auth'), namespace='accounts')
+    ),
 ]
 
 if settings.DEBUG:
