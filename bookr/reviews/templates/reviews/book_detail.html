@@ -26,7 +26,7 @@
             {% if review.date_edited %}<br/> Last modified: {{ review.date_edited }}{% endif %}
             <p>{{review.content }}</p>
             &mdash; <span>{{ review.creator.email }}</span>
-            {% if request.user.is_staff or request.user.id == review.creator.id %}
+            {% if user.is_staff or user.id == review.creator.id %}
             <a href={% url 'review_edit' book.pk review.pk %}>Edit review</a>
             {% endif %}
         </li>
