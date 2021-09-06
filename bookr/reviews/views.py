@@ -39,8 +39,8 @@ def book_search(request):
 
     # "If the form hasn't been filled, render the form with the previously used
     # `Search in` option selected."
-    if request.GET.get("search") == '' and search_history:
-        last_search_in_used = search_history[-1][1]
+    if request.GET.get("search") is None and search_history:
+        last_search_in_used = search_history[-1][0]
         initial = {'search': '', 'search_in': last_search_in_used}
         form = SearchForm(initial=initial)
 
