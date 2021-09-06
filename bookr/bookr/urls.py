@@ -34,7 +34,7 @@ urlpatterns = [
     path(
         "accounts/", include(('django.contrib.auth.urls', 'auth'), namespace='accounts')
     ),
-    path("accounts/profile", profile, name="profile"),
+    path("accounts/profile/", profile, name="profile"),
 ]
 
 if settings.DEBUG:

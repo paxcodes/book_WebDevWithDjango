@@ -1,8 +1,10 @@
 from io import BytesIO
 
+from django.core.exceptions import PermissionDenied
 from django.core.files.images import ImageFile
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.utils import timezone
 from PIL import Image
 
@@ -70,6 +72,13 @@ def book_details(request, pk):
     return render(request, 'reviews/book_detail.html', context)
 
 
+def is_staff_user(user):
+    return user.is_staff
+
+
+# You can also use the decorator from the same package, django.contrib.auth.decorators
+# @permission_required('edit_publisher')
+@user_passes_test(is_staff_user)
 def publisher_edit(request, pk=None):
     publisher = None if pk is None else get_object_or_404(Publisher, pk=pk)
     if request.method == 'POST':
@@ -95,12 +104,20 @@ def publisher_edit(request, pk=None):
     )
 
 
+@login_required
 def review_edit(request, book_pk, review_pk=None):
     # sourcery skip: extract-method
     book = get_object_or_404(Book, pk=book_pk)
     review = (
         get_object_or_404(Review, book_id=book_pk, pk=review_pk) if review_pk else None
     )
+
+    # If an existing review is being edited, ensure that the user is either a staff or
+    # owner of the review.
+    if review:
+        user = request.user
+        if not user.is_staff and review.creator.id != user.id:
+            raise PermissionDenied
 
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
@@ -129,6 +146,7 @@ def review_edit(request, book_pk, review_pk=None):
     )
 
 
+@login_required
 def book_media(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
