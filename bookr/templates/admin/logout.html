@@ -1,0 +1,8 @@
+<!-- Use the same master layout as provided by the django.contrib.admin module -->
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<p>You have been logged out from the Admin panel.</p>
+<!-- The values for `admin:index` and `site_url` are provided by the `AdminSite` class automatically -->
+<p><a href="{% url 'admin:index' %}">Login again</a> or <a href="{{ site_url }}">Go to Home Page</a></p>
+{% endblock content %}
