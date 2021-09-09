@@ -23,5 +23,12 @@ class BookrAdmin(admin.AdminSite):
     def get_urls(self):
         """Overrides the AdminSite.get_urls() method."""
         urls = super().get_urls()
-        url_patterns = [path("profile", self.profile_view)]
+        # To make sure that this view is only accessible to the logged-in admins, wrap
+        # `self.profile_view` with `self.admin_view()`. The `AdminSite.admin_view()
+        # method causes the view to be restricted to those users who are logged in.
+        # If a user who is currently not logged into the admin site tries to visit the
+        # URL directly, they will get redirected to the login page, and only in the
+        # event of a successful login will they be allowed to see the contents of our
+        # custom page.
+        url_patterns = [path("profile", self.admin_view(self.profile_view))]
         return urls + url_patterns
