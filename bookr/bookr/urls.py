@@ -16,9 +16,9 @@ Including another URLconf
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
 
 from bookr.views import profile
-from bookr_admin.admin import admin_site
 
 urlpatterns = [
     # `include()` is a shortcut that allows you to combine URL configurations.
@@ -29,7 +29,7 @@ urlpatterns = [
     # pattern found in the examples (see docstring on top of this file).
     # TODO POSSIBLE ANSWER: admin.site.urls is already a tuple
     path("", include('reviews.urls')),
-    path("admin/", admin_site.urls),
+    path("admin/", admin.site.urls),
     path(
         "accounts/", include(('django.contrib.auth.urls', 'auth'), namespace='accounts')
     ),
