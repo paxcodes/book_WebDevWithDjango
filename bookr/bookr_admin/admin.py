@@ -18,7 +18,7 @@ class BookrAdmin(admin.AdminSite):
         context = self.each_context(request)
         # Render the custom profile template when someone visits the URL endpoint
         # mapped to the custom view.
-        return TemplateResponse(request, "admin/admin_profile.html", context)
+        return TemplateResponse(request, "admin/profile.html", context)
 
     def get_urls(self):
         """Overrides the AdminSite.get_urls() method."""
