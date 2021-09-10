@@ -5,6 +5,8 @@ from django.contrib import admin
 
 class BookrAdmin(admin.AdminSite):
     site_header = "Bookr Administration"
+    site_title = "Bookr Administration"
+    index_title = "Bookr Administration"
     logout_template = 'admin/logout.html'
 
     def profile_view(self, request):
