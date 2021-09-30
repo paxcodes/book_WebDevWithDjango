@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reviews',
-    'filter_demo',
+    'filter_demo',  # Throw-away app for advanced templating demo purposes
+    'book_management',  # Throw-away app for CBV demo purposes
 ]
 
 MIDDLEWARE = [
