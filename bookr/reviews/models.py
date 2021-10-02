@@ -38,6 +38,10 @@ class Contributor(models.Model):
         """Full name of contributor. E.g. Williams, Pax"""
         return f"{self.last_names}, {self.first_names}"
 
+    @property
+    def contribution_count(self):
+        return self.bookcontributor_set.count()
+
 
 class Book(models.Model):
     """A published book."""

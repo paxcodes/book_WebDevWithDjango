@@ -217,6 +217,8 @@ book_1_contributors = book_with_pk_1.contributors.all()
 # Contributor `model` doesn't have a `book` attribute defined, but we can still get
 # the books a contributor has contributed to by using `MODELNAME_set.all()`
 contributor1.book_set.all()
+# We can directly get the number of books a contributor has contributed to:
+contributor1.book_set.count()
 
 # Sorting
 contributors_by_last_name = Contributor.objects.order_by("last_names")
