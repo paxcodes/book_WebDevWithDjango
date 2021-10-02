@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'reviews',
     'filter_demo',  # Throw-away app for advanced templating demo purposes
     'book_management',  # Throw-away app for CBV demo purposes
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
