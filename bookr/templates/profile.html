@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load profile_tags %}
+
 {% block content %}
 
 <style>
@@ -53,4 +55,7 @@
         {% endfor %}
     </div>
 </div>
+
+{% book_list request.user.username %}
+
 {% endblock content %}
