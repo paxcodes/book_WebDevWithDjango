@@ -58,4 +58,8 @@
 
 {% book_list request.user.username %}
 
+{% autoescape off %}
+    {{ books_read_plot }}
+{% endautoescape %}
+
 {% endblock content %}
