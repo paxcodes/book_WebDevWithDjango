@@ -5,13 +5,13 @@ from reviews.models import Review
 
 
 def get_books_reviewed_by_month(username: str):
-    """Get the books read by the user on per month basis.
+    """Get the count of books reviewed by the user on per month basis.
 
     Args:
         username (str): The username for which the books needs to be returned.
 
     Returns:
-        A dictionary of books read, with months as keys.
+        A dictionary of number of books reviewed, with months as keys.
     """
     current_year = datetime.now().year
     return (
