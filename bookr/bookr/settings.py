@@ -25,9 +25,9 @@ class Dev(Configuration):
     SECRET_KEY = '94n&jxy(gdg$7z771crbx5t4)c#h*n8c#-^ku+d73+g%vy+&so'
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = True
+    DEBUG = values.BooleanValue(True)
 
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = values.ListValue([])
 
     # Application definition
 
