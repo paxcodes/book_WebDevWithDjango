@@ -1,5 +1,6 @@
 asgiref==3.2.10
 Django==3.1
+django-configurations==2.2
 djangorestframework==3.12.4
 Pillow==8.3.2
 plotly==5.3.1
