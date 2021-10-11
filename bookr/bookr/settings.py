@@ -125,3 +125,8 @@ class Dev(Configuration):
 
     MEDIA_ROOT = BASE_DIR / "media"
     MEDIA_URL = '/media/'
+
+
+class Prod(Dev):
+    DEBUG = False
+    SECRET_KEY = values.SecretValue()
