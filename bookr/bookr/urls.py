@@ -40,4 +40,10 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # TODO "...however, we will add it to the start of `urlpatterns` rather than
+    # appending it to the end. (p. 710)" Why do we have to add it to the start?
+    # What happens if we add it at the end?
+    import debug_toolbar
+
+    urlpatterns = [path('__debug__/', include(debug_toolbar.urls))] + urlpatterns
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
