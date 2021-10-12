@@ -43,6 +43,7 @@ class Dev(Configuration):
         'filter_demo',  # Throw-away app for advanced templating demo purposes
         'book_management',  # Throw-away app for CBV demo purposes
         'rest_framework',
+        'debug_toolbar',
     ]
 
     MIDDLEWARE = [
@@ -53,7 +54,12 @@ class Dev(Configuration):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
+
+    # This setting wil make the Django Debug Toolbar only show up on the
+    # developer's computer.
+    INTERNAL_IPS = ['127.0.0.1']
 
     ROOT_URLCONF = 'bookr.urls'
 
@@ -78,7 +84,9 @@ class Dev(Configuration):
     # Database
     # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-    DATABASES = values.DatabaseURLValue(f'sqlite:///{BASE_DIR}/db.sqlite3', environ_prefix='DJANGO')
+    DATABASES = values.DatabaseURLValue(
+        f'sqlite:///{BASE_DIR}/db.sqlite3', environ_prefix='DJANGO'
+    )
 
     # Password validation
     # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
