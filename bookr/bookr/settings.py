@@ -44,7 +44,10 @@ class Dev(Configuration):
         'book_management',  # Throw-away app for CBV demo purposes
         'rest_framework',
         'debug_toolbar',
+        'crispy_forms',
     ]
+
+    CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
