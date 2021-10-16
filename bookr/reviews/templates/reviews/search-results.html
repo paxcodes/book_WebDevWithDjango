@@ -1,5 +1,7 @@
 {% extends 'reviews/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     {% if form.is_valid and search_text %}
         Search Results for {{ search_text }}
@@ -10,10 +12,7 @@
 
 {% block content %}
     <h2>Search for Books</h2>
-    <form method="get">
-        {{ form.as_p }}
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </form>
+    {% crispy form %}
 
     {% if form.is_valid and search_text %}
         {% if not results %}
