@@ -11,6 +11,14 @@ SEARCH_IN_CHOICES = (
 )
 
 
+class InstanceForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        submit_text = "Save" if kwargs["instance"] else "Create"
+        self.helper.add_input(Submit("", submit_text))
+
+
 class SearchForm(forms.Form):
     search = forms.CharField(required=False, min_length=3)
     search_in = forms.ChoiceField(required=False, choices=SEARCH_IN_CHOICES)
@@ -22,13 +30,13 @@ class SearchForm(forms.Form):
         self.helper.add_input(Submit("", "Search"))
 
 
-class PublisherForm(forms.ModelForm):
+class PublisherForm(InstanceForm):
     class Meta:
         model = Publisher
         fields = "__all__"
 
 
-class ReviewForm(forms.ModelForm):
+class ReviewForm(InstanceForm):
     class Meta:
         model = Review
         fields = (
@@ -44,7 +52,7 @@ class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField(min_value=0, max_value=5)
 
 
-class BookMediaForm(forms.ModelForm):
+class BookMediaForm(InstanceForm):
     class Meta:
         model = Book
         fields = (
