@@ -127,9 +127,10 @@ class Dev(Configuration):
 
     STATIC_URL = '/static/'
 
+    STATIC_ROOT = values.Value()
     STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 
-    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_ROOT = values.Value(BASE_DIR / "media")
     MEDIA_URL = '/media/'
 
 
